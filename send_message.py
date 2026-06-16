@@ -43,7 +43,7 @@ def send_daily_notification():
                     index, prediction = a.group('index'), a.group('prediction')
                     if len(prediction) > 10 and not check_numerals(prediction):
                         translated = translator.translate(prediction)
-                        ru_predictions.add(translated)
+                        ru_predictions.add(f'{index} {translated}')
         message_text = '\n'.join(ru_predictions)
 
         try:
