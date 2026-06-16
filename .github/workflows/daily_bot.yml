@@ -2,9 +2,7 @@ name: Send Daily Telegram Message
 
 on:
   schedule:
-    - cron: '30 17 * * *'
-      timezone: 'Asia/Novosibirsk'
-  workflow_dispatch: # Allows you to manually test and trigger the script via GitHub UI
+    - cron: '40 10 * * *'
 
 jobs:
   send-msg:
