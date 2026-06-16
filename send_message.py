@@ -11,34 +11,6 @@ translator = GoogleTranslator(source='en', target='ru')
 
 USERS_FILE = 'users.txt'
 
-def append_user_id(user_id):
-    # Создаем файл, если он не существует
-    if not os.path.exists(USERS_FILE):
-        with open(USERS_FILE, 'w') as f:
-            pass
-
-    # Читаем текущих пользователей, чтобы избежать дубликатов
-    with open(USERS_FILE, 'r') as f:
-        existing_users = [line.strip() for line in f]
-
-    # Если пользователя нет в списке, добавляем его
-    if str(user_id) not in existing_users:
-        with open(USERS_FILE, 'a') as f:
-            f.write(f"{user_id}\n")
-        return True
-    return False
-
-
-@bot.message_handler(commands=['start'])
-def start_command(message):
-    chat_id = message.chat.id
-    is_new = append_user_id(chat_id)
-
-    if is_new:
-        bot.reply_to(message, "Вы успешно подписались на рассылку!")
-    else:
-        bot.reply_to(message, "Вы уже подписаны на рассылку.")
-
 def check_numerals(line_to_check):
     has_digit = bool(re.search(r'\d', line_to_check))
     return has_digit
