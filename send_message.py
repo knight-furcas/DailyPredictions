@@ -23,7 +23,7 @@ def send_daily_notification():
     with open('eng_predictions_index.txt', 'r') as file:
         lines = file.readlines()
         while len(ru_predictions) < 3:
-            i = random.randint(0, 322293)
+            i = random.randint(0, 32293)
             predict = lines[i]
             a = re.match(r"(?P<index>\w+([0-9]*\.)*:)\s(?P<prediction>[\s\w\-,';]+\.)", predict)
             if a:
