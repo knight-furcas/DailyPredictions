@@ -2,7 +2,7 @@ name: Send Daily Telegram Message
 
 on:
   schedule:
-    - cron: '30 23 * * *'
+    - cron: '0 0 * * *'
   workflow_dispatch: # Allows you to manually test and trigger the script via GitHub UI
 
 jobs:
@@ -27,5 +27,4 @@ jobs:
     - name: Execute Script
       env:
         TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
-        TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
       run: python send_message.py
