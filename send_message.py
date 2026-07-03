@@ -38,7 +38,7 @@ def send_daily_notification():
             while len(ru_predictions) < 3:
                 i = random.randint(0, 32293)
                 predict = lines[i]
-                a = re.match(r"(?P<index>\w+([0-9]*\.)*:)\s(?P<prediction>[\s\w\-,';]+\.)", predict)
+                a = re.match(r"(?P<index>\w+([0-9]*\.)*:)\s(?P<prediction>[\s\w\-,';]+)\.", predict)
                 if a:
                     index, prediction = a.group('index'), a.group('prediction')
                     if len(prediction) > 10 and not check_numerals(prediction):
