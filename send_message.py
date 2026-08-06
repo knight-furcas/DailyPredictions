@@ -8,7 +8,7 @@ BOT_TOKEN = os.environ.get('TELEGRAM_BOT_TOKEN')
 bot = telebot.TeleBot(BOT_TOKEN)
 
 translator_google = GoogleTranslator(source='en', target='ru')
-translator_my_memory = MyMemoryTranslator(source='en', target='ru')
+translator_my_memory = MyMemoryTranslator(source='english', target='russian')
 USERS_FILE = 'users.txt'
 
 def check_numerals(line_to_check):
