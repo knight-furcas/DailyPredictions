@@ -2,13 +2,13 @@ import os
 import telebot
 import re
 import random
-from deep_translator import GoogleTranslator
+from deep_translator import GoogleTranslator, MyMemoryTranslator
 
 BOT_TOKEN = os.environ.get('TELEGRAM_BOT_TOKEN')
 bot = telebot.TeleBot(BOT_TOKEN)
 
-translator = GoogleTranslator(source='en', target='ru')
-
+translator_google = GoogleTranslator(source='en', target='ru')
+translator_my_memory = MyMemoryTranslator(source='en', target='ru')
 USERS_FILE = 'users.txt'
 
 def check_numerals(line_to_check):
@@ -42,7 +42,11 @@ def send_daily_notification():
                 if a:
                     index, prediction = a.group('index'), a.group('prediction')
                     if len(prediction) > 10 and not check_numerals(prediction):
-                        translated = translator.translate(prediction)
+                        try:
+                            translated = translator_google.translate(prediction)
+                        except Exception as e:
+                            print(f'Error: {e}')
+                            translated = translator_my_memory.translate(prediction)
                         ru_predictions.add(f'{index} {translated}')
         message_text = '\n'.join(ru_predictions)
 
