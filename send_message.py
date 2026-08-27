@@ -35,21 +35,21 @@ def send_daily_notification():
     for user_id in users:
         time.sleep(1)
         ru_predictions = set()
-        with open('eng_predictions_index.txt', 'r') as file:
+        with open('motifs.txt', 'r') as file:
             lines = file.readlines()
             while len(ru_predictions) < 3:
-                i = random.randint(0, 32293)
+                i = random.randint(0, len(lines))
                 predict = lines[i]
-                a = re.match(r"(?P<index>\w+([0-9]*\.)*:)\s(?P<prediction>[\s\w\-,';]+)\.", predict)
+                a = re.match(r"(?P<index>\w+([0-9]*\.))\s(?P<prediction>.*)", predict)
                 if a:
                     index, prediction = a.group('index'), a.group('prediction')
-                    if len(prediction) > 10 and not check_numerals(prediction):
-                        try:
-                            translated = translator_google.translate(prediction)
-                        except Exception as e:
-                            print(f'Error: {e}')
-                            translated = translator_my_memory.translate(prediction)
-                        ru_predictions.add(f'{index} {translated}')
+                    try:
+                        translated = translator_google.translate(prediction)
+                    except Exception as e:
+                        print(f'Error: {e}')
+                        translated = translator_my_memory.translate(prediction)
+                    print(translated)
+                    ru_predictions.add(f'{index} {translated}')
         message_text = '\n'.join(ru_predictions)
 
         try:
