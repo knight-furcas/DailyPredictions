@@ -2,6 +2,7 @@ import os
 import telebot
 import re
 import random
+import time
 from deep_translator import GoogleTranslator, MyMemoryTranslator
 
 BOT_TOKEN = os.environ.get('TELEGRAM_BOT_TOKEN')
@@ -32,6 +33,7 @@ def send_daily_notification():
 
 
     for user_id in users:
+        time.sleep(1)
         ru_predictions = set()
         with open('eng_predictions_index.txt', 'r') as file:
             lines = file.readlines()
