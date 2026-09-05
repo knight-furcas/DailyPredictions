@@ -48,7 +48,6 @@ def send_daily_notification():
                     except Exception as e:
                         print(f'Error: {e}')
                         translated = translator_my_memory.translate(prediction)
-                    print(translated)
                     ru_predictions.add(f'{index} {translated}')
         message_text = '\n'.join(ru_predictions)
 
